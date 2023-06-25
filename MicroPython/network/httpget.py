@@ -1,8 +1,9 @@
 import network
-import socket
 from time import sleep
 from picozero import pico_temp_sensor, pico_led
 import machine
+import urequests
+import ujson
 
 
 #
@@ -22,8 +23,27 @@ def connect(ssid, password):
     return ip
 
 
+def access(url):
+    print("start!!!")
+    try:
+        json_data = urequests.get(url)
+        print("dating!!!")
+        print(type(json_data))
+        print(json_data.text)
+
+    except OSError:
+        return False
+    return True
+
+
 if __name__ == "__main__":
-    ssid = "ssid"
-    password = "pass"
+    # ssid = ""
+    # password = ""
     ip = connect(ssid, password)
-    print("connect{ip}")
+    print(f"connect{ip}")
+    url = "http://zip.cgis.biz/xml/zip.php?zn=1030000"
+
+    for num in range(10):
+        if access(url):
+            break
+        sleep(0.5)
