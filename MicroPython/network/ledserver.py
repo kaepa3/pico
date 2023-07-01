@@ -3,24 +3,17 @@ import socket
 from time import sleep
 from picozero import pico_temp_sensor, pico_led
 import machine
+import env
 
-#
-# Wi-Fi ルーターのSSIDとパスワードです。
-# お使いの設定に書き換えてください。
-#
-ssid = "ssid"
-password = "pass"
 
 #
 # Wi-Fiに接続する関数です
 #
-
-
 def connect():
     # Connect to WLAN
     wlan = network.WLAN(network.STA_IF)
     wlan.active(True)
-    wlan.connect(ssid, password)
+    wlan.connect(env.Ssid, env.Password)
     while wlan.isconnected() == False:
         print("Waiting for connection...")
         sleep(1)
@@ -32,8 +25,6 @@ def connect():
 #
 # WEBページを生成する関数です
 #
-
-
 def webpage(temperature, state):
     # Template HTML
     html = f"""
@@ -56,8 +47,6 @@ def webpage(temperature, state):
 #
 # クライアント(ブラウザ)からの接続に対応する関数です
 #
-
-
 def serve(connection):
     # Start a web server
     state = "OFF"
