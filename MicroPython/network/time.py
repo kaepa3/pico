@@ -32,8 +32,7 @@ class TimeObj:
 
 
 if __name__ == "__main__":
-    # nw = httpget.Network("CENTRAL_WIFI", "centralsp")
-    nw = httpget.Network("山崎孝洋のiPhone (2)", "TTu8-IUAZ-9HM5-ex9e")
+    nw = httpget.Network("", "")
     rst = nw.Connect()
     print(rst)
     print("before：%s" % str(utime.localtime()))
